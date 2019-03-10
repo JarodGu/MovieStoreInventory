@@ -3,4 +3,4 @@ project(asg4)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(asg4 main.cpp store.h store.cpp)
+add_executable(asg4 driver.cpp store.h store.cpp bintree.h bintree.cpp nodedata.h nodedata.cpp)
