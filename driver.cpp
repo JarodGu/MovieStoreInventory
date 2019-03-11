@@ -150,53 +150,32 @@ int main()
         string token;
 
         // Tokenize input
-        getline(ss, token, delim);
-        while(getline(ss, token, delim))
+        getline(ss, token, ' ');
+        while(getline(ss, token, ' '))
         {
-            token.erase(0, 1); // erase extra space at start
+            //token.erase(0, 1); // erase extra space at start
             tokens.push_back(token);
         }
 
-        if(movieCmd == 'F') // add comedy movie
+        if(storeCmd == 'B') // Borrow movie
         {
-            int stock = stoi(tokens[0]);
-            int year = stoi(tokens[3]);
-
-            //Store.addMovie('F', stock, tokens[1], tokens[2], year);
+            //Store.Borrow
         }
-        else if(movieCmd == 'D') // add drama movie
+        else if(storeCmd == 'R') // Return movie
         {
-            int stock = stoi(tokens[0]);
-            int year = stoi(tokens[3]);
-
-            //Store.addMovie('D', stock, tokens[1], tokens[2], year);
+            //Store.Return
         }
-        else if(movieCmd == 'C') // add classical movie
+        else if(storeCmd == 'I') // Output inventory
         {
-            // split tokens[3] into actorFirst, actorLast, month, and year
-            string actorFirst = "";
-            string actorLast = "";
-            string sMonth = "";
-            string sYear = "";
-
-            istringstream sss(tokens[3]);
-
-            getline(sss, actorFirst, ' ');
-            getline(sss, actorLast, ' ');
-            getline(sss, sMonth, ' ');
-            getline(sss, sYear, ' ');
-
-            int stock = stoi(tokens[0]);
-            int month = stoi(sMonth);
-            int year = stoi(sYear);
-
-            //Store.addMovie('C', stock, tokens[1], tokens[2], actorFirst, actorLast, month, year);
+            //Store.getInventory();
+        }
+        else if(storeCmd == 'H') // Output customer's transaction history
+        {
+            //Store.History
         } else {
-            cout << "Error: Invalid movie code" << endl;
+            cout << "Error: Invalid command code" << endl;
         }
     }
-
-
 
     return 0;
 }
