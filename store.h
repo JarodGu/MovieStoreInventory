@@ -14,21 +14,32 @@
 #include <iostream>
 #include "bintree.h"
 
+//#include "customer.h"
+//#include "movie.h"
+
 class Store{
 public:
-    // Reads input from data4movies.txt
-    //bool readMovieFile;
+    Store();
+    ~Store();
 
-    // Reads input from data4customers.txt
-    //bool readCustomerFile;
+    bool Borrow(char mediaType, Movie &mov);
 
-    // Reads input from data4commands.txt
-    //bool readCommandfile;
+    bool Return(char mediaType, Movie &mov);
 
+    bool History(Customer &cust) const;
 
+    void getInventory() const;
 
+    bool AddMovie(char genre, int stock, const string &director,
+            const string &title, int year);
+
+    bool AddClassicMovie(int stock, const string &director, const string &title,
+            const string &actorFirst, const string &actorLast, int month, int year);
+
+    bool AddCustomer(int custID, const string &first, const string &last);
 private:
     BinTree Movies;
+    // Customer hash table
 };
 
 #endif //ASG4_STORE_H

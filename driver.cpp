@@ -19,8 +19,7 @@ using namespace std;
 
 int main()
 {
-    // Variables
-    char delim = ',';
+    Store BlockBuster;
 
     // Part 1: Populate movie inventory from data4movies.txt
     ifstream infile1("data4movies.txt");
@@ -46,8 +45,8 @@ int main()
         string token;
 
         // Tokenize input
-        getline(ss, token, delim);
-        while(getline(ss, token, delim))
+        getline(ss, token, ',');
+        while(getline(ss, token, ','))
         {
             token.erase(0, 1); // erase extra space at start
             tokens.push_back(token);
@@ -58,14 +57,14 @@ int main()
             int stock = stoi(tokens[0]);
             int year = stoi(tokens[3]);
 
-            //Store.addMovie('F', stock, tokens[1], tokens[2], year);
+            BlockBuster.AddMovie('F', stock, tokens[1], tokens[2], year);
         }
         else if(movieCmd == 'D') // add drama movie
         {
             int stock = stoi(tokens[0]);
             int year = stoi(tokens[3]);
 
-            //Store.addMovie('D', stock, tokens[1], tokens[2], year);
+            BlockBuster.AddMovie('D', stock, tokens[1], tokens[2], year);
         }
         else if(movieCmd == 'C') // add classical movie
         {
@@ -86,7 +85,7 @@ int main()
             int month = stoi(sMonth);
             int year = stoi(sYear);
 
-            //Store.addMovie('C', stock, tokens[1], tokens[2], actorFirst, actorLast, month, year);
+            BlockBuster.AddClassicMovie(stock, tokens[1], tokens[2], actorFirst, actorLast, month, year);
         } else {
             cout << "Error: Invalid movie code" << endl;
         }
@@ -121,7 +120,7 @@ int main()
         string custLast = tokens[1];
         string custFirst = tokens[2];
 
-        //Store.addCustomer(custID, custLast, custFirst);
+        BlockBuster.AddCustomer(custID, custLast, custFirst);
     }
 
     // Part 3: Perform commands on the store from data4commands.txt
@@ -167,7 +166,7 @@ int main()
         }
         else if(storeCmd == 'I') // Output inventory
         {
-            //Store.getInventory();
+            BlockBuster.getInventory();
         }
         else if(storeCmd == 'H') // Output customer's transaction history
         {
@@ -176,6 +175,5 @@ int main()
             cout << "Error: Invalid command code" << endl;
         }
     }
-
     return 0;
 }
