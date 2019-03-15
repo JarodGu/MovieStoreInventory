@@ -20,6 +20,7 @@ public:
     // Returns current stock
     int getStock() const;
 
+    void setStock(int newStock);
     //
     bool borrowMedia() const;
 

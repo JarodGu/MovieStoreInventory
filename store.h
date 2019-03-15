@@ -13,7 +13,10 @@
 #define ASG4_STORE_H
 #include <iostream>
 #include "bintree.h"
-#include "movie.h"
+#include "media.h"
+#include "comedy.h"
+#include "drama.h"
+#include "classic.h"
 #include "customertable.h"
 
 //#include "customer.h"
@@ -24,9 +27,9 @@ public:
     Store();
     ~Store();
 
-    bool Borrow(char mediaType, Movie &mov);
+    bool Borrow(char mediaType, int custID, Media &mov); // Do I need to make Movie const?
 
-    bool Return(char mediaType, Movie &mov);
+    bool Return(char mediaType, int custID, Media &mov);
 
     bool History(int custID) const;
 
@@ -41,7 +44,7 @@ public:
     bool AddCustomer(int custID, const string &first, const string &last);
 private:
     BinTree Movies;
-    // Customer hash table
+    CustomerTable Customers;
 };
 
 #endif //ASG4_STORE_H

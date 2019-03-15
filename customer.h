@@ -18,5 +18,5 @@ public:
     string getLastName() const;
     string getHistory() const;
     
-    void addTransaction(const string); 
+    void addTransaction(const string&);
 };

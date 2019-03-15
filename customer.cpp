@@ -39,7 +39,11 @@ string Customer::getHistory() const {
     return build;
 }
 
-void Customer::addTransaction(const string trans) {
+/*
+ * Adds a string representing a customer transaction to the customer's
+ * transaction history. String is formatted in the store class.
+ */
+void Customer::addTransaction(const string &trans) {
     string addTo = trans;
     history.push_back(addTo);
 }

@@ -16,7 +16,7 @@
  */
 Store::Store()
 {
-
+    // Do I need to create empty binary tree and customertable?
 }
 
 /*
@@ -30,58 +30,119 @@ Store::~Store()
 /*
  * Customer borrows a movie and its stock goes down by 1
  * Returns false if the movie is out of stock or
- * doesn't exist
+ * doesn't exist in the store's library.
+ * Adds a transaction to the customer's history.
+ * Format: Cust#<ID> borrowed <MovieTitle>
  */
-bool Store::Borrow(char mediaType, Movie &theMovie)
+bool Store::Borrow(char mediaType, int custID, Media &theMovie)
 {
+    NodeData temp(&theMovie);
+    NodeData *pTarget;
+    if(Movies.retrieve(temp, pTarget)) // we have the movie
+    {
+        int currentStock = pTarget->getStock();
+        if(currentStock < 1){
+            return false; // Out of stock
+        } else {
+            pTarget->setStock(currentStock - 1);
+            // Add transaction to customer
+            string transaction = "Cust#" + to_string(custID) + "borrowed " + Movie::getTitle();
+            Customers.addTransaction(custID, transaction);
+            return true;
+        }
+    }
     return false;
 }
 
 /*
  * Customer returns a movie and its stock goes up by 1
- * Returns false if the movie does not exist in inventory.
+ * Returns false if the movie does not exist in store's library.
+ * Adds a transaction to the customer's history.
+ * Format: Cust#<ID> returned <MovieTitle>
  */
-bool Store::Return(char mediaType, Movie &theMovie)
+bool Store::Return(char mediaType, int custID, Media &theMovie)
 {
-
+    NodeData temp(&theMovie);
+    NodeData *pTarget;
+    if(Movies.retrieve(temp, pTarget)) // can't return a movie we don't have
+    {
+        int currentStock = pTarget->getStock();
+        pTarget->setStock(currentStock - 1);
+        // Add transaction to customer
+        string transaction = "Cust#" + to_string(custID) + "returned " + theMovie.getTitle();
+        Customers.addTransaction(custID, transaction);
+        return true;
+    }
     return false;
 }
 
 /*
- * Returns the customer's transaction history
+ * Outputs the customer's transaction history.
+ * Returns false if the customer ID doesn't exist.
  */
 bool Store::History(int custID) const
 {
-    return false;
+    if(!Customers.customerExists(custID))
+    {
+        return false;
+    }
+    cout << Customers.getHistory(custID);
+    return true;
 }
 
 /*
  * Prints out the stores current movie inventory in sorted order
- * provided in the assignment4.doc
+ * provided in the assignment4.doc. Outputs Comedies, Dramas,
+ * then Classics.
  */
 void Store::getInventory() const
 {
     // Traverse BinTree inorder and cout all elements
+    if(Movies.isEmpty())
+    {
+        cout << "Store empty. Is it Black Friday?" << endl;
+    } else {
+        cout << Movies << endl;
+    }
 }
 
 /*
- * Adds a movie to the inventory.
+ * Adds a Comedy or Drama movie to the inventory.
  * Returns false if unsupported genre or movie
  * already exists.
  */
 bool Store::AddMovie(char genre, int stock, const string &director, const string &title, int year)
 {
+    // Create movie object on heap
+    // If it does, delete then return false w/ error message
+    // Otherwise add it to the inventory using insert (sorted)
+    if(genre == 'F') // Comedy
+    {
+        Comedy *mov = new Comedy(stock, director, title, year);
+        NodeData *temp = new NodeData(mov);
+        return Movies.insert(temp); // Returns false if the movie already exists
+        // TODO: Test if false insert deletes the objects. Don't want memory leak
+    }
+    else if(genre == 'D') // Drama
+    {
+        Drama *mov = new Drama(stock, director, title, year);
+        NodeData *temp = new NodeData(mov);
+        return Movies.insert(temp); // Returns false if the movie already exists
+    }
     return false;
+    // Check if it already exists
 }
 
 /*
- * Adds a classical movie to the inventory.
+ * Adds a Classical movie to the inventory.
  * Returns false if unsupported genre or movie already exists.
  */
 bool Store::AddClassicMovie(int stock, const string &director, const string &title, const string &actorFirst,
                             const string &actorLast, int month, int year)
 {
-    return false;
+    Classic *mov = new Classic(stock, director, title, actorFirst, month, year); // TODO: Add actorLast
+    NodeData *temp = new NodeData(mov);
+    return Movies.insert(temp);
 }
 
 /*
@@ -89,7 +150,11 @@ bool Store::AddClassicMovie(int stock, const string &director, const string &tit
  */
 bool Store::AddCustomer(int custID, const string &first, const string &last)
 {
-    return false;
+    if(Customers.customerExists(custID)){
+        return false; // Customer already exists
+    }
+    Customers.addCustomer(custID, first, last);
+    return true;
 }
 
 
