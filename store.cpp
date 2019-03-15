@@ -50,7 +50,7 @@ bool Store::Return(char mediaType, Movie &theMovie)
 /*
  * Returns the customer's transaction history
  */
-bool Store::History(Customer &cust) const
+bool Store::History(int custID) const
 {
     return false;
 }

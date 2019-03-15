@@ -13,6 +13,8 @@
 #define ASG4_STORE_H
 #include <iostream>
 #include "bintree.h"
+#include "movie.h"
+#include "customertable.h"
 
 //#include "customer.h"
 //#include "movie.h"
@@ -26,7 +28,7 @@ public:
 
     bool Return(char mediaType, Movie &mov);
 
-    bool History(Customer &cust) const;
+    bool History(int custID) const;
 
     void getInventory() const;
 
