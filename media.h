@@ -20,12 +20,12 @@ public:
     // Returns current stock
     int getStock() const;
 
-    void setStock(int newStock);
-    //
-    bool borrowMedia() const;
+    // Removes one unit from the stock of this media
+    // Returns false if stock is <= 0, true if stock > 0
+    bool borrowStock();
 
-    //
-    bool returnMedia() const;
+    // Adds one unit from the stock of this media
+    void returnStock();
 
     // Comparison operators - Compares based on their media type
     // If same media type will always be equal

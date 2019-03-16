@@ -7,16 +7,25 @@
 
 // Constructor
 Classic::Classic(int stock, std::string director,
-                 std::string title, std::string majorActor,
-                 int releaseMonth, int releaseYear) :
+                 std::string title, std::string actorFirst,
+                 std::string actorLast, int releaseMonth, int releaseYear) :
         Movie('C', stock, director, title, releaseYear),
-        majorActor{majorActor}, releaseMonth{releaseMonth} {
+        actorFirst{actorFirst}, actorLast{actorLast},
+        releaseMonth{releaseMonth} {
 
 }
 
 // Returns major actor
 std::string Classic::getMajorActor() const {
-    return majorActor;
+    return getActorFirst() + " " + getActorLast();
+}
+
+std::string Classic::getActorFirst() const {
+    return actorFirst;
+}
+
+std::string Classic::getActorLast() const {
+    return actorLast;
 }
 
 // Returns release month
@@ -36,7 +45,7 @@ bool Classic::operator>(const Classic &other) const {
         if (releaseMonth > other.releaseMonth) {
             return true;
         } else if (releaseMonth == other.releaseMonth) {
-            int compare = majorActor.compare(other.getMajorActor());
+            int compare = getMajorActor().compare(other.getMajorActor());
             return compare < 0;
         }
     }
@@ -50,7 +59,7 @@ bool Classic::operator<(const Classic &other) const {
 bool Classic::operator==(const Classic &other) const {
     return (getReleaseYear() == other.getReleaseYear()
             && releaseMonth == other.releaseMonth
-            && majorActor == other.majorActor
+            && getMajorActor() == other.getMajorActor()
             && getMovieType() == other.getMovieType());
 }
 
@@ -82,6 +91,8 @@ std::string Classic::string() const {
     out += std::to_string(getReleaseYear());
     return out;
 }
+
+
 
 
 

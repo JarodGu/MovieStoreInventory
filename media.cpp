@@ -24,17 +24,6 @@ int Media::getStock() const {
     return stock;
 }
 
-/*
- * Cannot set to negative stock
- */
-void Media::setStock(int newStock)
-{
-    if(newStock > -1)
-    {
-        stock = newStock;
-    }
-}
-
 bool Media::operator>(const Media &other) const {
     return mediaType > other.getMediaType();
 }
@@ -57,6 +46,18 @@ bool Media::operator==(const Media &other) const {
 
 bool Media::operator!=(const Media &other) const {
     return mediaType != other.getMediaType();
+}
+
+bool Media::borrowStock() {
+    if (stock > 0) {
+        stock--;
+        return true;
+    }
+    return false;
+}
+
+void Media::returnStock() {
+    stock++;
 }
 
 

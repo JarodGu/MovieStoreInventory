@@ -12,11 +12,17 @@ class Classic : public Movie {
 public:
     // Constructor
     Classic(int stock, std::string director,
-            std::string title, std::string majorActor,
+            std::string title, std::string actorFirst, std::string actorLast,
             int releaseMonth, int releaseYear);
 
-    // Returns major actor
+    // Returns major actors full name
     std::string getMajorActor() const;
+
+    // Returns major actors first name
+    std::string getActorFirst() const;
+
+    // Returns major actors last name
+    std::string getActorLast() const;
 
     // Returns release month
     int getReleaseMonth() const;
@@ -40,7 +46,8 @@ public:
 
 private:
     // Data only within Classic movies
-    std::string majorActor;
+    std::string actorFirst;
+    std::string actorLast;
     int releaseMonth;
 };
 
