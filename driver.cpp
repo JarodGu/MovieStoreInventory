@@ -91,6 +91,8 @@ int main()
         }
     }
 
+    cout << "Done reading in movies" << std::endl;
+
     // Part 2: Populate customer hash table from data4customers.txt
     ifstream infile2("data4customers.txt");
     if (!infile2)
@@ -122,6 +124,8 @@ int main()
 
         BlockBuster.AddCustomer(custID, custLast, custFirst);
     }
+
+    cout << "Done reading in customers" << std::endl;
 
     // Part 3: Perform commands on the store from data4commands.txt
     //          'B' = Borrow movie

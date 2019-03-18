@@ -17,6 +17,7 @@
 Store::Store()
 {
     // Do I need to create empty binary tree and customertable?
+    ///// I don't think so, depending on your implementation it should be done already
 }
 
 /*
@@ -34,7 +35,7 @@ Store::~Store()
  * Adds a transaction to the customer's history.
  * Format: Cust#<ID> borrowed <MovieTitle>
  */
-bool Store::Borrow(char mediaType, int custID, Media &theMovie)
+bool Store::Borrow(int custID, Movie &theMovie)
 {
     NodeData temp(&theMovie);
     NodeData *pTarget;
@@ -44,9 +45,9 @@ bool Store::Borrow(char mediaType, int custID, Media &theMovie)
         if(currentStock < 1){
             return false; // Out of stock
         } else {
-            pTarget->setStock(currentStock - 1);
+            theMovie.borrowStock();
             // Add transaction to customer
-            string transaction = "Cust#" + to_string(custID) + "borrowed " + Movie::getTitle();
+            string transaction = "Cust#" + to_string(custID) + "borrowed " + theMovie.getTitle();
             Customers.addTransaction(custID, transaction);
             return true;
         }
@@ -60,14 +61,13 @@ bool Store::Borrow(char mediaType, int custID, Media &theMovie)
  * Adds a transaction to the customer's history.
  * Format: Cust#<ID> returned <MovieTitle>
  */
-bool Store::Return(char mediaType, int custID, Media &theMovie)
+bool Store::Return(int custID, Movie &theMovie)
 {
     NodeData temp(&theMovie);
     NodeData *pTarget;
     if(Movies.retrieve(temp, pTarget)) // can't return a movie we don't have
     {
-        int currentStock = pTarget->getStock();
-        pTarget->setStock(currentStock - 1);
+        theMovie.returnStock();
         // Add transaction to customer
         string transaction = "Cust#" + to_string(custID) + "returned " + theMovie.getTitle();
         Customers.addTransaction(custID, transaction);
@@ -140,7 +140,7 @@ bool Store::AddMovie(char genre, int stock, const string &director, const string
 bool Store::AddClassicMovie(int stock, const string &director, const string &title, const string &actorFirst,
                             const string &actorLast, int month, int year)
 {
-    Classic *mov = new Classic(stock, director, title, actorFirst, month, year); // TODO: Add actorLast
+    Classic *mov = new Classic(stock, director, title, actorFirst, actorLast, month, year);
     NodeData *temp = new NodeData(mov);
     return Movies.insert(temp);
 }

@@ -27,9 +27,9 @@ public:
     Store();
     ~Store();
 
-    bool Borrow(char mediaType, int custID, Media &mov); // Do I need to make Movie const?
+    bool Borrow(int custID, Movie &mov); // Do I need to make Movie const?
 
-    bool Return(char mediaType, int custID, Media &mov);
+    bool Return(int custID, Movie &mov);
 
     bool History(int custID) const;
 
