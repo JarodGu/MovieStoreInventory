@@ -40,7 +40,7 @@ void BinTree::coutHelper(std::ostream &outStream, const BinTree::Node *current) 
     {
         coutHelper(outStream, current->left);
     }
-    outStream << *current->data << " ";
+    outStream << *current->data << endl;
     if(current->right != nullptr)
     {
         coutHelper(outStream, current->right);

@@ -26,17 +26,18 @@ class NodeData {
 public:
 	NodeData();          // default constructor, data is set to an empty string
 	~NodeData();
-	NodeData(Media *mov);      // data is set equal to parameter
+	NodeData(Movie *mov);      // data is set equal to parameter
 	//NodeData(const NodeData &);    // copy constructor (not needed)
 	NodeData& operator=(const NodeData &);
 
 
 	// Used to set the data to a movie. Movie objects are created in the main driver on the stack
-	void setData(Media *pMovie);
+	void setData(Movie *pMovie);
 
 	// Used to get and set the stock of the movie.
 	int getStock() const;
-	void setStock(int newStock);
+	void returnStock(); // Increments stock by 1
+	bool borrowStock(); // Decrements stock by 1
 
 
 	bool operator==(const NodeData &) const;
@@ -46,7 +47,7 @@ public:
 	bool operator<=(const NodeData &) const;
 	bool operator>=(const NodeData &) const;
 private:
-	Media *data;
+	Movie *data;
 	int stock;
 };
 

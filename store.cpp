@@ -41,17 +41,20 @@ bool Store::Borrow(int custID, Movie &theMovie)
     NodeData *pTarget;
     if(Movies.retrieve(temp, pTarget)) // we have the movie
     {
-        int currentStock = pTarget->getStock();
-        if(currentStock < 1){
-            return false; // Out of stock
-        } else {
-            theMovie.borrowStock();
+        if(pTarget->borrowStock())
+        {
             // Add transaction to customer
             string transaction = "Cust#" + to_string(custID) + "borrowed " + theMovie.getTitle();
             Customers.addTransaction(custID, transaction);
             return true;
         }
+        else
+        {
+            // movie out of stock
+            cout << "Error: Movie currently out of stock" << endl;
+        }
     }
+    cout << "Error: Movie not in inventory" << endl;
     return false;
 }
 
@@ -67,12 +70,13 @@ bool Store::Return(int custID, Movie &theMovie)
     NodeData *pTarget;
     if(Movies.retrieve(temp, pTarget)) // can't return a movie we don't have
     {
-        theMovie.returnStock();
+        pTarget->returnStock();
         // Add transaction to customer
         string transaction = "Cust#" + to_string(custID) + "returned " + theMovie.getTitle();
         Customers.addTransaction(custID, transaction);
         return true;
     }
+    cout << "Error: Movie not in inventory" << endl;
     return false;
 }
 
@@ -111,7 +115,7 @@ void Store::getInventory() const
  * Returns false if unsupported genre or movie
  * already exists.
  */
-bool Store::AddMovie(char genre, int stock, const string &director, const string &title, int year)
+bool Store::AddMovie(char genre, int stock, string director, string title, int year)
 {
     // Create movie object on heap
     // If it does, delete then return false w/ error message
@@ -137,8 +141,8 @@ bool Store::AddMovie(char genre, int stock, const string &director, const string
  * Adds a Classical movie to the inventory.
  * Returns false if unsupported genre or movie already exists.
  */
-bool Store::AddClassicMovie(int stock, const string &director, const string &title, const string &actorFirst,
-                            const string &actorLast, int month, int year)
+bool Store::AddClassicMovie(int stock, string director, string title, string actorFirst,
+                            string actorLast, int month, int year)
 {
     Classic *mov = new Classic(stock, director, title, actorFirst, actorLast, month, year);
     NodeData *temp = new NodeData(mov);

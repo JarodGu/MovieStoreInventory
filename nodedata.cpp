@@ -17,7 +17,7 @@ NodeData::NodeData() { data = nullptr; }                         // default
 /*
  * Main constructor used to set the NodeData to a movie.
  */
-NodeData::NodeData(Media *mov)
+NodeData::NodeData(Movie *mov)
 {
 	data = mov;
 }
@@ -38,11 +38,20 @@ int NodeData::getStock() const
 }
 
 /*
- * Sets the stock of the movie pointed to by data
+ * Decrements the stock of a movie by 1.
+ * Returns false if the movie has no stock left.
  */
-void NodeData::setStock(int newStock)
+bool NodeData::borrowStock()
 {
-	data->setStock(newStock);
+	return data->borrowStock();
+}
+
+/*
+ * Increments the stock of a movie by 1
+ */
+void NodeData::returnStock()
+{
+	data->returnStock();
 }
 
 //NodeData::NodeData(const NodeData& nd) { data = nd.data; }  // copy
@@ -86,12 +95,12 @@ bool NodeData::operator>=(const NodeData& rhs) const {
 //------------------------------ setData -------------------------------------
 // returns true if the data is set, false when bad data, i.e., is eof
 
-void NodeData::setData(Media *pMovie) {
+void NodeData::setData(Movie *pMovie) {
 	data = pMovie;
 }
 
 //-------------------------- operator<< --------------------------------------
 ostream& operator<<(ostream& output, const NodeData& nd) {
-	output << nd.data;
+	output << *(nd.data);
 	return output;
 }

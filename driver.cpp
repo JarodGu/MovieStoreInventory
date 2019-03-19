@@ -105,7 +105,7 @@ int main()
     {
         vector<string> tokens; // Create vector to hold info about customer to be added
         getline(infile2,info);
-
+        if (info == "") break; // Reached end
         if (info[info.size() - 1] == '\r') // trim \r from string
             info.resize(info.size() - 1);
 

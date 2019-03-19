@@ -19,9 +19,6 @@
 #include "classic.h"
 #include "customertable.h"
 
-//#include "customer.h"
-//#include "movie.h"
-
 class Store{
 public:
     Store();
@@ -35,11 +32,11 @@ public:
 
     void getInventory() const;
 
-    bool AddMovie(char genre, int stock, const string &director,
-            const string &title, int year);
+    bool AddMovie(char genre, int stock, string director,
+            string title, int year);
 
-    bool AddClassicMovie(int stock, const string &director, const string &title,
-            const string &actorFirst, const string &actorLast, int month, int year);
+    bool AddClassicMovie(int stock, string director, string title,
+            string actorFirst, string actorLast, int month, int year);
 
     bool AddCustomer(int custID, const string &first, const string &last);
 private:
