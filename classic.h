@@ -45,13 +45,19 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const Classic& in);
 
-    virtual std::string string() const;
+    std::string string() const override;
+
+    int compare(const Movie &other) const override;
 
 private:
     // Data only within Classic movies
     std::string actorFirst;
     std::string actorLast;
     int releaseMonth;
+
+    int compareRelease(const Classic &other) const;
+
+    int compareActor(const Classic &other) const;
 };
 
 

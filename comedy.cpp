@@ -15,16 +15,7 @@ Comedy::Comedy(int stock, std::string director,
 }
 
 bool Comedy::operator>(const Comedy &other) const {
-    if (getMovieType() != other.getMovieType()) {
-        return greaterThanMovieTypes(other);
-    }
-    if (getTitle() < other.getTitle()) {
-        return true;
-    }
-    if (getTitle() == other.getTitle()) {
-        return (getReleaseYear() > other.getReleaseYear());
-    }
-    return false;
+    return (compare(other) == 1);
 }
 
 bool Comedy::operator<(const Comedy &other) const {
@@ -32,9 +23,7 @@ bool Comedy::operator<(const Comedy &other) const {
 }
 
 bool Comedy::operator==(const Comedy &other) const {
-    return (getTitle() == other.getTitle()
-            && getReleaseYear() == other.getReleaseYear()
-            && getMovieType() == other.getMovieType());
+    return (compare(other) == 0);
 }
 
 bool Comedy::operator!=(const Comedy &other) const {
@@ -42,11 +31,11 @@ bool Comedy::operator!=(const Comedy &other) const {
 }
 
 bool Comedy::operator>=(const Comedy &other) const {
-    return (*(this) > other || (*(this) == other));
+    return (*(this) > other || *(this) == other);
 }
 
 bool Comedy::operator<=(const Comedy &other) const {
-    return (*(this) < other || (*(this) == other));
+    return (*(this) < other || *(this) == other);
 }
 
 std::ostream &operator<<(std::ostream &out, const Comedy &in) {
@@ -62,4 +51,27 @@ std::string Comedy::string() const {
     out += getTitle() + " ";
     out += std::to_string(getReleaseYear());
     return out;
+}
+
+int Comedy::compare(const Movie &other) const {
+    if (compareMovieType(other) != 0) {
+        return compareMovieType(other);
+    }
+    if (getTitle() == other.getTitle()) {
+        if (getReleaseYear() == other.getReleaseYear()) {
+            return 0;
+        }
+        if (getReleaseYear() > other.getReleaseYear()) {
+            return 1;
+        }
+        if (getReleaseYear() < other.getReleaseYear()) {
+            return -1;
+        }
+    }
+    if (getTitle() < other.getTitle()) {
+        return 1;
+    }
+    if (getTitle() > other.getTitle()) {
+        return -1;
+    }
 }

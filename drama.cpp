@@ -15,16 +15,7 @@ Drama::Drama(int stock, std::string director,
 }
 
 bool Drama::operator>(const Drama &other) const {
-    if (getMovieType() != other.getMovieType()) {
-        return greaterThanMovieTypes(other);
-    }
-    if (getDirector() < other.getDirector()) {
-        return true;
-    }
-    if (getDirector() == other.getDirector()) {
-        return getTitle() < other.getTitle();
-    }
-    return false;
+    return (compare(other) == 1);
 }
 
 bool Drama::operator<(const Drama &other) const {
@@ -32,13 +23,11 @@ bool Drama::operator<(const Drama &other) const {
 }
 
 bool Drama::operator==(const Drama &other) const {
-    return (getDirector() == other.getDirector()
-            && getTitle() == other.getTitle()
-            && getMovieType() == other.getMovieType());
+    return (compare(other) == 0);
 }
 
 bool Drama::operator!=(const Drama &other) const {
-    return !(*(this) == other);;
+    return !(*(this) == other);
 }
 
 bool Drama::operator>=(const Drama &other) const {
@@ -62,6 +51,29 @@ std::string Drama::string() const {
     out += getTitle() + " ";
     out += std::to_string(getReleaseYear());
     return out;
+}
+
+int Drama::compare(const Movie &other) const {
+    if (compareMovieType(other) != 0) {
+        return compareMovieType(other);
+    }
+    if (getDirector() == other.getDirector()) {
+        if (getTitle() == other.getTitle()) {
+            return 0;
+        }
+        if (getTitle() < other.getTitle()) {
+            return 1;
+        }
+        if (getTitle() > other.getTitle()) {
+            return -1;
+        }
+    }
+    if (getDirector() < other.getDirector()) {
+        return 1;
+    }
+    if (getDirector() > other.getDirector()) {
+        return -1;
+    }
 }
 
 

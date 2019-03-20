@@ -38,21 +38,7 @@ int Classic::getReleaseMonth() const {
 
 // Compares classics against other classics by release date, major actor
 bool Classic::operator>(const Classic &other) const {
-    if (getMovieType() != other.getMovieType()) {
-        return greaterThanMovieTypes(other);
-    }
-    if (getReleaseYear() > other.getReleaseYear()) {
-        return true;
-    }
-    if (getReleaseYear() == other.getReleaseYear()) {
-        if (releaseMonth > other.releaseMonth) {
-            return true;
-        } else if (releaseMonth == other.releaseMonth) {
-            int compare = getMajorActor().compare(other.getMajorActor());
-            return compare < 0;
-        }
-    }
-    return false;
+    return (compare(other) == 1);
 }
 
 bool Classic::operator<(const Classic &other) const {
@@ -60,14 +46,11 @@ bool Classic::operator<(const Classic &other) const {
 }
 
 bool Classic::operator==(const Classic &other) const {
-    return (getReleaseYear() == other.getReleaseYear()
-            && releaseMonth == other.releaseMonth
-            && getMajorActor() == other.getMajorActor()
-            && getMovieType() == other.getMovieType());
+    return (compare(other) == 0);
 }
 
 bool Classic::operator!=(const Classic &other) const {
-    return !(*(this) == other);
+    return (compare(other) != 0);
 }
 
 bool Classic::operator>=(const Classic &other) const {
@@ -94,6 +77,62 @@ std::string Classic::string() const {
     out += std::to_string(getReleaseYear());
     return out;
 }
+
+int Classic::compare(const Movie &other) const {
+    if (compareMovieType(other) != 0) {
+        return compareMovieType(other);
+    }
+    const auto *otherPtr = dynamic_cast<const Classic*>(&other);
+    int temp = compareRelease(*otherPtr);
+    if (temp == 0) {
+        return compareActor(*otherPtr);
+    }
+    return temp;
+}
+
+
+int Classic::compareRelease(const Classic &other) const {
+    if (getReleaseYear() == other.getReleaseYear()) {
+        if (getReleaseMonth() == other.getReleaseMonth()) {
+            return 0;
+        }
+        if (getReleaseMonth() > other.getReleaseMonth()) {
+            return 1;
+        }
+        if (getReleaseMonth() < other.getReleaseMonth()) {
+            return -1;
+        }
+    }
+    if (getReleaseYear() > other.getReleaseYear()) {
+        return 1;
+    }
+    if (getReleaseYear() < other.getReleaseYear()) {
+        return -1;
+    }
+    return INT16_MAX;
+}
+
+int Classic::compareActor(const Classic &other) const {
+    if (getActorFirst() == other.getActorFirst()) {
+        if (getActorLast() == other.getActorLast()) {
+            return 0;
+        }
+        if (getActorLast() < other.getActorLast()) {
+            return 1;
+        }
+        if (getActorLast() > other.getActorLast()) {
+            return -1;
+        }
+    }
+    if (getActorFirst() < other.getActorFirst()) {
+        return 1;
+    }
+    if (getActorFirst() > other.getActorFirst()) {
+        return -1;
+    }
+    return INT16_MAX;
+}
+
 
 
 

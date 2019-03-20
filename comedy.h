@@ -33,7 +33,9 @@ public:
 
     bool operator<=(const Comedy &other) const;
 
-    virtual std::string string() const;
+    std::string string() const override;
+
+    int compare(const Movie &other) const override;
 };
 
 

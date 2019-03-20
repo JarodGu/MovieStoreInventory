@@ -46,10 +46,12 @@ public:
 
     virtual std::string string() const;
 
+    virtual int compare(const Movie &other) const = 0;
+
 protected:
     friend std::ostream &operator<<(std::ostream &out, const Movie &in);
 
-    bool greaterThanMovieTypes(const Movie &other) const;
+    int compareMovieType(const Movie &other) const;
 
 private:
     // Movie data
