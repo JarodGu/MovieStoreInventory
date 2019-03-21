@@ -2,7 +2,8 @@
 // Created by Kaib Cropley on 3/4/2019.
 // Updated by Kaib Cropley on 3/20/2019.
 //
-// Drama movie
+// Drama movie inheriting from the Movie and Media classes
+// Contains all the same data as parent classes but different operators
 //
 
 #ifndef CROPLEY_ASSIGNMENT_4_DRAMA_H

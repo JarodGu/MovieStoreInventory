@@ -2,7 +2,7 @@
 // Created by Kaib Cropley on 3/4/2019.
 // Updated by Kaib Cropley on 3/20/2019.
 //
-// Base file for all movie types within store
+// Abstract parent object for all movies within store
 //
 
 #include <iostream>
