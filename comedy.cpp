@@ -73,10 +73,10 @@ int Comedy::compare(const Movie &other) const {
             return -1;
         }
     }
-    if (getTitle() < other.getTitle()) {
+    if (getTitle() > other.getTitle()) {
         return 1;
     }
-    if (getTitle() > other.getTitle()) {
+    if (getTitle() < other.getTitle()) {
         return -1;
     }
 }
