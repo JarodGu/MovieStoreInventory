@@ -16,6 +16,7 @@
 #include <iostream>
 #include <fstream>
 #include "movie.h"
+#include "classic.h"
 using namespace std;
 
 // simple class containing one string to use for testing
@@ -42,8 +43,9 @@ public:
 	// Methods to get movie information
 	string getTitle(); // gets movie title
 	int getReleaseYear(); // gets movie release year
-	int getReleaseMonth(); // gets a CLASSIC MOVIE release year. Returns 0 if not a classic
+	int getReleaseMonth(); // gets a CLASSIC MOVIE release month. Returns 0 if not a classic
 	string getDirector(); // gets movie director
+	char getGenre(); // gets movie genre
 	Movie& getData();
 
 

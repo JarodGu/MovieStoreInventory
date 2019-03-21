@@ -358,17 +358,50 @@ void BinTree::dramaHelper(BinTree::Node *current, string &director, string &titl
     }
 }
 
+/*
+ * Retrieves a classic movie from the movie inventory using the movie's
+ * release date and major actor.
+ * Searches inventory using in-order traversal.
+ * Postcondition: pTarget points to the NodeData with th target movie if found
+ */
 bool
 BinTree::retrieveClassic(int releaseMonth, int releaseYear, string &actorFirst, string &actorLast, NodeData *&pTarget)
 {
-    return false;
+    classicHelper(root, releaseMonth, releaseYear, actorFirst, actorLast, pTarget);
+    return pTarget != nullptr;
 }
 
+/*
+ * Helper function sets pTarget equal to the classic movie in inventory
+ * if the release date and major actor match
+ */
 void
 BinTree::classicHelper(BinTree::Node *current, int releaseMonth, int releaseYear, string &actorFirst, string &actorLast,
                        NodeData *&pTarget)
 {
+    if(current != nullptr)
+    {
+        // Left
+        classicHelper(current->left, releaseMonth, releaseYear, actorFirst, actorLast, pTarget);
+        // Current - Check if equal
+        if(current->data->getGenre() == 'C'){
+            // We know current is a classic movie, so we type cast
+            const auto *otherPtr = dynamic_cast<const Classic*>(&current->data->getData());
+            // Get variables from type casted Movie
+            int otherMonth = otherPtr->getReleaseMonth();
+            int otherYear = otherPtr->getReleaseYear();
+            string otherActorFirst = otherPtr->getActorFirst();
+            string otherActorLast = otherPtr->getActorLast();
 
+            if(releaseMonth == otherMonth && releaseYear == otherYear // Check for equality
+                    && actorFirst == otherActorFirst && actorLast == otherActorLast)
+            {
+                pTarget = current->data;
+            }
+        }
+        // Right
+        classicHelper(current->right, releaseMonth, releaseYear, actorFirst, actorLast, pTarget);
+    }
 }
 
 

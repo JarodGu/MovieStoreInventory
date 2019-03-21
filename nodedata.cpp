@@ -67,12 +67,19 @@ int NodeData::getReleaseYear()
     return data->getReleaseYear();
 }
 
-/* TODO
+/*
+ * How would you get release month
+ */
 int NodeData::getReleaseMonth()
 {
     return 0;
 }
-*/
+
+char NodeData::getGenre()
+{
+    return data->getMovieType();
+}
+
 string NodeData::getDirector()
 {
     return data->getDirector();

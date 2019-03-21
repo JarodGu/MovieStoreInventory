@@ -1,7 +1,7 @@
 // ------------- store.cpp -------------------------------------------------
 // Jarod Guerrero CSS 343 C
 // Created 3/9/19
-// Last Modified 3/10/19
+// Last Modified 3/20/19
 // -------------------------------------------------------------------------
 // Implementation file for the store class
 // -------------------------------------------------------------------------
@@ -77,8 +77,10 @@ bool Store::History(int custID) const
 {
     if(!Customers.customerExists(custID))
     {
+        cout << "Error: Customer does not exist" << endl;
         return false;
     }
+    cout << "\n--- Transaction History for Cust#" << custID << endl;
     cout << Customers.getHistory(custID);
     return true;
 }
@@ -114,7 +116,6 @@ bool Store::AddMovie(char genre, int stock, string director, string title, int y
         Comedy *mov = new Comedy(stock, director, title, year);
         NodeData *temp = new NodeData(mov);
         return Movies.insert(temp); // Returns false if the movie already exists
-        // TODO: Test if false insert deletes the objects. Don't want memory leak
     }
     else if(genre == 'D') // Drama
     {
@@ -165,4 +166,9 @@ bool Store::findComedy(string &title, int releaseYear, NodeData* &pTarget)
 bool Store::findDrama(string &director, string &title, NodeData *&pTarget)
 {
     return Movies.retrieveDrama(director, title, pTarget);
+}
+
+bool Store::findClassic(int releaseMonth, int releaseYear, string &actorFirst, string &actorLast, NodeData *&pTarget)
+{
+    return Movies.retrieveClassic(releaseMonth, releaseYear, actorFirst, actorLast, pTarget);
 }

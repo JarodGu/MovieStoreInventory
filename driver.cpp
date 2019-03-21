@@ -28,6 +28,14 @@ int main()
         cout << "data4movies.txt not found." << endl;
         return 1;
     }
+    cout    << "  _____                _ _               __  __            _           " << endl;
+    cout    << " |  __ \\              | (_)             |  \\/  |          (_)          " << endl;
+    cout    << " | |__) |___  __ _  __| |_ _ __   __ _  | \\  / | _____   ___  ___  ___ " << endl;
+    cout    << " |  _  // _ \\/ _` |/ _` | | '_ \\ / _` | | |\\/| |/ _ \\ \\ / / |/ _ \\/ __|" << endl;
+    cout    << " | | \\ \\  __/ (_| | (_| | | | | | (_| | | |  | | (_) \\ V /| |  __/\\__ \\" << endl;
+    cout    << " |_|  \\_\\___|\\__,_|\\__,_|_|_| |_|\\__, | |_|  |_|\\___/ \\_/ |_|\\___||___/" << endl;
+    cout    << "                                  __/ |                                " << endl;
+    cout    << "                                 |___/                                 " << endl;
 
     char movieCmd;
     string info;
@@ -91,7 +99,7 @@ int main()
         }
     }
 
-    cout << "Done reading in movies" << std::endl;
+
 
     // Part 2: Populate customer hash table from data4customers.txt
     ifstream infile2("data4customers.txt");
@@ -100,7 +108,14 @@ int main()
         cout << "data4customers.txt not found." << endl;
         return 1;
     }
-
+    cout    << "______               _ _               _____           _                                " << endl;
+    cout    << "| ___ \\             | (_)             /  __ \\         | |                               " << endl;
+    cout    << "| |_/ /___  __ _  __| |_ _ __   __ _  | /  \\/_   _ ___| |_ ___  _ __ ___   ___ _ __ ___ " << endl;
+    cout    << "|    // _ \\/ _` |/ _` | | '_ \\ / _` | | |   | | | / __| __/ _ \\| '_ ` _ \\ / _ \\ '__/ __|" << endl;
+    cout    << "| |\\ \\  __/ (_| | (_| | | | | | (_| | | \\__/\\ |_| \\__ \\ || (_) | | | | | |  __/ |  \\__ \\" << endl;
+    cout    << "\\_| \\_\\___|\\__,_|\\__,_|_|_| |_|\\__, |  \\____/\\__,_|___/\\__\\___/|_| |_| |_|\\___|_|  |___/" << endl;
+    cout    << "                                __/ |                                                   " << endl;
+    cout    << "                               |___/                                                    " << endl;
     while(!infile2.eof())
     {
         vector<string> tokens; // Create vector to hold info about customer to be added
@@ -138,6 +153,14 @@ int main()
         cout << "data4commands.txt not found." << endl;
         return 1;
     }
+    cout << "  _____                _ _                _____ __  __ _____  _     " << endl;
+    cout << " |  __ \\              | (_)              / ____|  \\/  |  __ \\( )    " << endl;
+    cout << " | |__) |___  __ _  __| |_ _ __   __ _  | |    | \\  / | |  | |/ ___ " << endl;
+    cout << " |  _  // _ \\/ _` |/ _` | | '_ \\ / _` | | |    | |\\/| | |  | | / __|" << endl;
+    cout << " | | \\ \\  __/ (_| | (_| | | | | | (_| | | |____| |  | | |__| | \\__ \\" << endl;
+    cout << " |_|  \\_\\___|\\__,_|\\__,_|_|_| |_|\\__, |  \\_____|_|  |_|_____/  |___/" << endl;
+    cout << "                                  __/ |                             " << endl;
+    cout << "                                 |___/                              " << endl;
 
     char storeCmd;
     while(!infile3.eof())
@@ -151,6 +174,7 @@ int main()
 
         if (storeCmd == 'I') // Output inventory
         {
+            cout << "------ Current Movie Inventory -------" << endl;
             BlockBuster.getInventory();
         }
             // Borrow movie
@@ -215,6 +239,27 @@ int main()
             } else if (genre == 'C') // Classic
             {
                 // Parse classic
+                getline(ss, token, ' '); // Get release month
+                int releaseMonth = stoi(token);
+
+                getline(ss, token, ' '); // Get release year
+                int releaseYear = stoi(token);
+
+                getline(ss, token, ' '); // Get actor first name
+                tokens.push_back(token); //[3]
+
+                getline(ss, token, ' '); // Get actor last name
+                tokens.push_back(token); //[4]
+
+                NodeData *pMovie = nullptr;
+                if(BlockBuster.findClassic(releaseMonth, releaseYear, tokens[3], tokens[4], pMovie))
+                {
+                    BlockBuster.Borrow(custID, pMovie->getData());
+                } else // Movie not found
+                {
+                    cout << "Error: Movie does not exist" << endl;
+                }
+
             } else
             {
                 cout << "Error: Movie genre does not exist" << endl;
@@ -282,51 +327,51 @@ int main()
             } else if (genre == 'C')
             {
                 // Parse classic
+                getline(ss, token, ' '); // Get release month
+                int releaseMonth = stoi(token);
+
+                getline(ss, token, ' '); // Get release year
+                int releaseYear = stoi(token);
+
+                getline(ss, token, ' '); // Get actor first name
+                tokens.push_back(token); //[3]
+
+                getline(ss, token, ' '); // Get actor last name
+                tokens.push_back(token); //[4]
+
+                NodeData *pMovie = nullptr;
+                if(BlockBuster.findClassic(releaseMonth, releaseYear, tokens[3], tokens[4], pMovie))
+                {
+                    BlockBuster.Return(custID, pMovie->getData());
+                } else // Movie not found
+                {
+                    cout << "Error: Movie does not exist" << endl;
+                }
             } else
             {
                 cout << "Error: Movie genre does not exist" << endl;
                 getline(infile3, info);
             }
-        } else if (storeCmd == 'H') // Output customer's transaction history
+            // Output customer's transaction history
+        } else if (storeCmd == 'H')
         {
-            //int custID = stoi(tokens[0]);
-            //BlockBuster.History(custID);
+            istringstream ss(info);
+            string token;
+
+            getline(ss, token, ' '); // Blank
+
+            getline(ss, token, ' '); // CustID
+            int custID = stoi(token);
+            if(!BlockBuster.History(custID))
+            {
+                cout << "Error: Customer does not exist" << endl;
+            }
+            cout << endl;
         } else
         {
             cout << "Error: Invalid command code" << endl;
         }
     }
-        /*
-        getline(infile3,info);
-
-        if (info[info.size() - 1] == '\r') // trim \r from string
-            info.resize(info.size() - 1);
-
-        istringstream ss(info);
-        string token;
-
-        // Tokenize input
-        getline(ss, token, ' ');
-        while(getline(ss, token, ' '))
-        {
-            //token.erase(0, 1); // erase extra space at start
-            tokens.push_back(token);
-        }
-
-
-        // For Borrow/Return, parse the first Four values
-
-        if(storeCmd == 'B')
-        {
-            //Store.Borrow
-        }
-        else if(storeCmd == 'R')
-        {
-            //Store.Return
-        }
-
-        else if(storeCmd == 'H')
-        {
-        */
+    cout << "\nDone reading in store commands.\nGood bye!" << endl;
     return 0;
 }
