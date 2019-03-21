@@ -1,11 +1,12 @@
-# Asg4-StoreAndDriver
-Contains all files for the movie store inventory system
+Jarod Guerrero, Ajeet Dhaliwal, Kaib Cropley
 
-DEMO
 
-STUFF
 
-STUFF
+How To:
+
+Running driver.cpp will read in movie and customer data through the given files (data4movies.txt and data4customers.txt). It will then continue to read from the given command file (data4commands.txt) and execute all given commands. It will print all outgoing messages to the console including error messages and results from commands.
+
+
 
 Contributions:
 
