@@ -63,5 +63,13 @@ void Media::returnStock() {
     stock++;
 }
 
+bool Media::setStock(int stockLevel) {
+    if (stockLevel < 0) {
+        return false;
+    }
+    stock = stockLevel;
+    return true;
+}
+
 
 

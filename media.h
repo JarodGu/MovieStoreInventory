@@ -23,6 +23,8 @@ public:
     // Returns current stock
     int getStock() const;
 
+    bool setStock(int stockLevel);
+
     // Removes one unit from the stock of this media
     // Returns false if stock is <= 0, true if stock > 0
     bool borrowStock();
