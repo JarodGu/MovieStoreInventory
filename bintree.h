@@ -1,9 +1,9 @@
 // ------------- bintree.h --------------------------------------------------
-// Jarod Guerrero CSS 343 C
+// Jarod Guerrero, Ajeet Dhaliwal, Kaib Cropley CSS 343 C
 // Created 1/27/19
-// Last Modified 2/3/19
+// Last Modified 3/20/19
 // -------------------------------------------------------------------------
-// Binary Search Tree header file
+// Binary Search Tree header file modified to support the movie store
 // -------------------------------------------------------------------------
 // The Binary Search Tree contains Nodes with string data
 // Header file contains several private helper functions to recursively

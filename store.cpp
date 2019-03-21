@@ -1,5 +1,5 @@
 // ------------- store.cpp -------------------------------------------------
-// Jarod Guerrero CSS 343 C
+// Jarod Guerrero, Ajeet Dhaliwal, Kaib Cropley CSS 343 C
 // Created 3/9/19
 // Last Modified 3/20/19
 // -------------------------------------------------------------------------
@@ -16,8 +16,6 @@
  */
 Store::Store()
 {
-    // Do I need to create empty binary tree and customertable?
-    ///// I don't think so, depending on your implementation it should be done already
 }
 
 /*
@@ -50,7 +48,6 @@ bool Store::Borrow(int custID, Movie &theMovie)
     }
     //cout << "Error: Movie not in inventory" << endl;
     return false;
-
 }
 
 /*

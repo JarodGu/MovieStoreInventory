@@ -1,9 +1,9 @@
 // ------------- bintree.cpp --------------------------------------------------
 // Jarod Guerrero CSS 343 C
 // Created 1/27/19
-// Last Modified 2/3/19
+// Last Modified 3/20/19
 // -------------------------------------------------------------------------
-// Binary Search Tree implementation file
+// Binary Search Tree implementation file modified to support the movie store
 // -------------------------------------------------------------------------
 // The Binary Search Tree contains Nodes with string data. Each node's left
 // children are less than its data, and right children are greater than.

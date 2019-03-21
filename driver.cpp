@@ -1,11 +1,17 @@
 // ------------- driver.cpp ------------------------------------------------
-// Jarod Guerrero CSS 343 C
+// Jarod Guerrero, Ajeet Dhaliwal, Kaib Cropley CSS 343 C
 // Created 3/9/19
-// Last Modified 3/10/19
+// Last Modified 3/20/19
 // -------------------------------------------------------------------------
 // Driver file for the Movie inventory system
 // -------------------------------------------------------------------------
-// Creates a Store class and performs commands based on file input
+// Creates a Store class and performs commands based on file input.
+// Takes three input files containing information about the store.
+// data4movies.txt contains movies to be added to the store
+// data4customers.txt contains a list of customers to be added
+//          to our hash table implemented with an array
+// data4commands.txt contains a list of commands to be executed
+//          on the created store
 // -------------------------------------------------------------------------
 
 #include <iostream>

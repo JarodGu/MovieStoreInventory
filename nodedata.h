@@ -1,9 +1,9 @@
 // ------------- nodedata.h --------------------------------------------------
-// Jarod Guerrero CSS 343 C
+// Jarod Guerrero, Ajeet Dhaliwal, Kaib Cropley CSS 343 C
 // Created 1/27/19
 // Last Modified 3/15/19
 // -------------------------------------------------------------------------
-// Node Data header file
+// Node Data header file modified for the movie store
 // -------------------------------------------------------------------------
 // NodeData class modified to hold Movie objects for use in Assignment 4
 // movie store inventory. Each NodeData object holds a pointer to the movie

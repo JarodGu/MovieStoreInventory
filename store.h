@@ -1,12 +1,12 @@
 // ------------- store.h ---------------------------------------------------
-// Jarod Guerrero CSS 343 C
+// Jarod Guerrero, Ajeet Dhaliwal, Kaib Cropley CSS 343 C
 // Created 3/9/19
 // Last Modified 3/20/19
 // -------------------------------------------------------------------------
 // Header file for the store class
 // -------------------------------------------------------------------------
 // Contains functions to populate a Movie store with inventory and
-// perform operations with customers based on file input.
+// perform operations.
 // -------------------------------------------------------------------------
 
 #ifndef ASG4_STORE_H

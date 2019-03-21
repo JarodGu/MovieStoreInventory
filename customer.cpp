@@ -1,17 +1,33 @@
+// ------------- customer.cpp ----------------------------------------------
+// Jarod Guerrero, Ajeet Dhaliwal, Kaib Cropley CSS 343 C
+// Created 3/5/19
+// Last Modified 3/20/19
+// -------------------------------------------------------------------------
+// Customer implementation file
+// Represents a customer
+// -------------------------------------------------------------------------
 #include "customer.h"
 using namespace std;
 
+/*
+ * this is cpp implementation fo cust class for use in HASHTABLE
+ */
+
+//default constructor initializes all elements to default values
 Customer::Customer() {
     ID = 0;
     firstName = "";
     lastName = "";
 }
 
+//self-explanatory
 Customer::Customer(const int inputID, const string fN, const string lN) {
     ID = inputID;
     firstName = fN;
     lastName = lN;
 }
+
+//getters
 
 int Customer::getID() const {
     return ID;
