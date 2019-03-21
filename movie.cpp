@@ -74,32 +74,34 @@ std::string Movie::string() const {
     return "";
 }
 
+// Compares movie types
+// Returns -1 if <, 0 if ==, 1 if >
 int Movie::compareMovieType(const Movie &other) const {
-    if (movieType == 'F') {
-        if (other.movieType == 'F') {
+    if (movieType == 'C') {
+        if (other.movieType == 'C') {
             return 0;
         }
-        if (other.movieType == 'D' || other.movieType == 'C') {
+        if (other.movieType == 'D' || other.movieType == 'F') {
             return 1;
         }
 
     }
     if (movieType == 'D') {
-        if (other.movieType == 'F') {
+        if (other.movieType == 'C') {
             return -1;
         }
         if (other.movieType == 'D') {
             return 0;
         }
-        if (other.movieType == 'C') {
+        if (other.movieType == 'F') {
             return 1;
         }
     }
-    if (movieType == 'C') {
-        if (other.movieType == 'F' || other.movieType == 'D') {
+    if (movieType == 'F') {
+        if (other.movieType == 'C' || other.movieType == 'D') {
             return -1;
         }
-        if (other.movieType == 'C') {
+        if (other.movieType == 'F') {
             return 0;
         }
     }
