@@ -1,6 +1,6 @@
 //
 // Created by Kaib Cropley on 3/4/2019.
-// Updated by Kaib Cropley on 3/18/2019.
+// Updated by Kaib Cropley on 3/20/2019.
 //
 // Comedy movie
 //
@@ -13,6 +13,7 @@
 #include "movie.h"
 
 class Comedy  : public Movie {
+    // Allows for converting this movie to ostream
     friend std::ostream &operator<<(std::ostream &out, const Comedy &in);
 
 public:
@@ -33,7 +34,12 @@ public:
 
     bool operator<=(const Comedy &other) const;
 
-    virtual std::string string() const;
+    // Returns movie with all of it's details as a string
+    std::string string() const override;
+
+    // Compares this movie to another
+    // Returns: -1 if <, 0 if ==, 1 if >
+    int compare(const Movie &other) const override;
 };
 
 

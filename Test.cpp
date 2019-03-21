@@ -104,21 +104,32 @@ void testSorting() {
     movies.push_back(&c1);
     movies.push_back(&c2);
     movies.push_back(&c3);
+
     movies.push_back(&f1);
     movies.push_back(&f2);
     movies.push_back(&f3);
+
     movies.push_back(&d1);
     movies.push_back(&d2);
     movies.push_back(&d3);
-
-    assert(*movies[0] < *movies[3]);
-    assert(*movies[0] < *movies[6]);
-    assert(*movies[3] > *movies[6]);
 
     for (int i{0}; i < movies.size(); i++) {
         std::cout << *movies[i] << std::endl;
     }
 
+    assert(*movies[0] <= *movies[3]);
+    assert(*movies[0] <= *movies[6]);
+    assert(*movies[3] >= *movies[6]);
+    assert(*movies[0] <= *movies[1]);
+    assert(*movies[6] >= *movies[0]);
+
+    assert(*movies[0] != *movies[1]);
+    assert(*movies[0] == *movies[0]);
+    assert(*movies[0] != *movies[3]);
+    assert(*movies[3] == *movies[3]);
+    assert(*movies[3] != *movies[4]);
+    assert(*movies[3] != *movies[6]);
+    assert(*movies[6] != *movies[7]);
 
     // Tests stock borrow/return
     int index = 0;
@@ -136,6 +147,9 @@ void testSorting() {
 
     assert(movies[index]->borrowStock());
     assert(movies[index]->getStock() == 0);
+
+    assert(movies[index]->setStock(100));
+    assert(movies[index]->getStock() == 100);
 
 }
 
