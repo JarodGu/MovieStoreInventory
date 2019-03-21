@@ -33,6 +33,11 @@ public:
     bool isEmpty() const;
     void makeEmpty();
     bool retrieve(const NodeData &target, NodeData* &pTarget);
+
+    bool retrieveComedy(string &title, int releaseYear, NodeData* &pTarget);
+    //bool retrieveDrama()
+    //bool retrieveClassic()
+
     bool insert(NodeData* item);
     int getHeight(const NodeData &n) const;
     void displaySideways() const;
@@ -51,6 +56,9 @@ private:
 
     };
     Node* root;
+
+    // Movie specific utility functions
+    void comedyHelper(Node *current, string &title, int releaseYear, NodeData* &pTarget);
 
     // Utility functions
     void inorderHelper(Node* current, int &index, NodeData* arr[]) const;

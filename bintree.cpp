@@ -289,6 +289,43 @@ BinTree::Node *BinTree::retrieveHelper(BinTree::Node *current, const NodeData &t
 }
 
 /*
+ * NEW: Now going to traverse the tree inorder to find a movie
+ * with the given criterion. Three seperate functions for each movie type.
+ * Used for borrow and return functions.
+ */
+void BinTree::comedyHelper(BinTree::Node *current, string &title, int releaseYear, NodeData* &pTarget)
+{
+    if(current != nullptr)
+    {
+        // Left
+        comedyHelper(current->left, title, releaseYear, pTarget);
+        // Current - Check if equal
+        if(current->data->getTitle() == title && current->data->getReleaseYear() == releaseYear)
+        {
+            pTarget = current->data;
+        }
+        // Right
+        comedyHelper(current->right, title, releaseYear, pTarget);
+    }
+}
+
+/*
+ * Functions to find a comedy movie in inventory. Returns false if not found.
+ * pTarget points to the target movie in inventory.
+ */
+bool BinTree::retrieveComedy(string &title, int releaseYear, NodeData *&pTarget)
+{
+    comedyHelper(root, title, releaseYear, pTarget);
+    return pTarget != nullptr;
+    /*
+    if(pTarget == nullptr){
+        return false;
+    }
+    return true;
+     */
+}
+
+/*
  * Inserts an item into the correct spot in the BinarySearchTree.
  * Creates a new tree if empty.
  * Returns false if inserting an existing value, otherwise true.

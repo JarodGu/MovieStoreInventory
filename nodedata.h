@@ -39,6 +39,13 @@ public:
 	void returnStock(); // Increments stock by 1
 	bool borrowStock(); // Decrements stock by 1
 
+	// Methods to get movie information
+	string getTitle(); // gets movie title
+	int getReleaseYear(); // gets movie release year
+	int getReleaseMonth(); // gets a CLASSIC MOVIE release year. Returns 0 if not a classic
+	string getDirector(); // gets movie director
+	Movie& getData();
+
 
 	bool operator==(const NodeData &) const;
 	bool operator!=(const NodeData &) const;
@@ -48,7 +55,6 @@ public:
 	bool operator>=(const NodeData &) const;
 private:
 	Movie *data;
-	int stock;
 };
 
 #endif

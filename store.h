@@ -24,9 +24,9 @@ public:
     Store();
     ~Store();
 
-    bool Borrow(int custID, Movie &mov); // Do I need to make Movie const?
+    bool Borrow(int custID, Movie &theMovie);
 
-    bool Return(int custID, Movie &mov);
+    bool Return(int custID, Movie &pMovie);
 
     bool History(int custID) const;
 
@@ -39,6 +39,11 @@ public:
             string actorFirst, string actorLast, int month, int year);
 
     bool AddCustomer(int custID, const string &first, const string &last);
+
+    // Functions to find movies (return and borrow)
+    bool findComedy(string &title, int releaseYear, NodeData *&pTarget);
+    bool findDrama(string &director, string &title, NodeData *&pTarget);
+
 private:
     BinTree Movies;
     CustomerTable Customers;

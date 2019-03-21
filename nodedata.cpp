@@ -54,6 +54,34 @@ void NodeData::returnStock()
 	data->returnStock();
 }
 
+/*
+ * Returns the title of the movie in NodeData
+ */
+string NodeData::getTitle()
+{
+	return data->getTitle();
+}
+
+int NodeData::getReleaseYear()
+{
+    return data->getReleaseYear();
+}
+
+/* TODO
+int NodeData::getReleaseMonth()
+{
+    return 0;
+}
+*/
+string NodeData::getDirector()
+{
+    return data->getDirector();
+}
+
+Movie& NodeData::getData()
+{
+    return *data;
+}
 //NodeData::NodeData(const NodeData& nd) { data = nd.data; }  // copy
 
 //NodeData::NodeData(const string& s) { data = s; }    // cast string to NodeData

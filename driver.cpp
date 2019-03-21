@@ -144,6 +144,95 @@ int main()
     {
         vector<string> tokens; // Create vector to hold info about a movie to be added
         storeCmd = infile3.get();
+
+        getline(infile3,info); // Get whole line
+        if (info[info.size() - 1] == '\r') // trim \r from string
+            info.resize(info.size() - 1);
+
+        if(storeCmd == 'I') // Output inventory
+        {
+            BlockBuster.getInventory();
+        }
+        else if(storeCmd =='B') // Borrow movie
+        {
+            // Parse
+            /*
+            getline(infile3,info);
+
+            if (info[info.size() - 1] == '\r') // trim \r from string
+                info.resize(info.size() - 1);
+            */
+
+            istringstream ss(info);
+            string token;
+
+            getline(ss, token, ' '); // Blank
+
+            getline(ss, token, ' '); // CustID
+            tokens.push_back(token);
+            int custID = stoi(tokens[0]);
+
+            getline(ss, token, ' '); // Media Type
+            tokens.push_back(token);
+            char mediaType = tokens[1][0];
+
+            getline(ss, token, ' '); // Genre
+            tokens.push_back(token);
+            char genre = tokens[2][0];
+
+            if(genre == 'F')
+            {
+                // Parse comedy
+                getline(ss, token, ','); // Get movie title
+                tokens.push_back(token);
+
+                getline(ss, token, ','); // Get release year
+                tokens.push_back(token);
+                int releaseYear = stoi(tokens[4]);
+
+                // Make a movie from the info
+
+                NodeData* pMovie = nullptr;
+                if(BlockBuster.findComedy(tokens[3], releaseYear, pMovie))
+                {
+                    BlockBuster.Borrow(custID, pMovie->getData());
+                }
+            }
+            else if(genre == 'D')
+            {
+                // Parse drama
+            }
+            else if(genre == 'C')
+            {
+                // Parse classic
+            } else {
+                cout << "Error: Movie genre does not exist" << endl;
+                getline(infile3,info);
+            }
+        }
+        /*
+            while(getline(ss, token, ' '))
+            {
+                //token.erase(0, 1); // erase extra space at start
+                tokens.push_back(token);
+            }
+
+        }
+        else if(storeCmd == 'R') // Return movie
+        {
+            // Parse
+        }
+        else if(storeCmd == 'H') // Output customer's transaction history
+        {
+            int custID = stoi(tokens[0]);
+            BlockBuster.History(custID);
+        }
+        else
+        {
+        cout << "Error: Invalid command code" << endl;
+        }
+
+
         getline(infile3,info);
 
         if (info[info.size() - 1] == '\r') // trim \r from string
@@ -160,24 +249,22 @@ int main()
             tokens.push_back(token);
         }
 
-        if(storeCmd == 'B') // Borrow movie
+
+        // For Borrow/Return, parse the first Four values
+
+        if(storeCmd == 'B')
         {
             //Store.Borrow
         }
-        else if(storeCmd == 'R') // Return movie
+        else if(storeCmd == 'R')
         {
             //Store.Return
         }
-        else if(storeCmd == 'I') // Output inventory
+
+        else if(storeCmd == 'H')
         {
-            BlockBuster.getInventory();
-        }
-        else if(storeCmd == 'H') // Output customer's transaction history
-        {
-            //Store.History
-        } else {
-            cout << "Error: Invalid command code" << endl;
-        }
+*/
+
     }
     return 0;
 }

@@ -34,28 +34,23 @@ Store::~Store()
  * doesn't exist in the store's library.
  * Adds a transaction to the customer's history.
  * Format: Cust#<ID> borrowed <MovieTitle>
+ * Precondition: The Movie exists within the database
  */
 bool Store::Borrow(int custID, Movie &theMovie)
 {
-    NodeData temp(&theMovie);
-    NodeData *pTarget;
-    if(Movies.retrieve(temp, pTarget)) // we have the movie
+    if(theMovie.borrowStock())
     {
-        if(pTarget->borrowStock())
-        {
-            // Add transaction to customer
-            string transaction = "Cust#" + to_string(custID) + "borrowed " + theMovie.getTitle();
-            Customers.addTransaction(custID, transaction);
-            return true;
-        }
-        else
-        {
+        // Add transaction to customer
+        string transaction = "Cust#" + to_string(custID) + "borrowed " + theMovie.getTitle();
+        Customers.addTransaction(custID, transaction);
+        return true;
+    } else {
             // movie out of stock
             cout << "Error: Movie currently out of stock" << endl;
-        }
     }
-    cout << "Error: Movie not in inventory" << endl;
+    //cout << "Error: Movie not in inventory" << endl;
     return false;
+
 }
 
 /*
@@ -161,4 +156,13 @@ bool Store::AddCustomer(int custID, const string &first, const string &last)
     return true;
 }
 
-
+/*
+ * Functions to retrieve a movie based on criterion.
+ * Returns false if the comedy movie could not be found.
+ * Returns true and sets pTarget to point to the movie
+ * in inventory if found.
+ */
+bool Store::findComedy(string &title, int releaseYear, NodeData* &pTarget)
+{
+    return Movies.retrieveComedy(title, releaseYear, pTarget);
+}
