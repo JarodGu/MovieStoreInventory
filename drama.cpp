@@ -66,17 +66,17 @@ int Drama::compare(const Movie &other) const {
         if (getTitle() == other.getTitle()) {
             return 0;
         }
-        if (getTitle() < other.getTitle()) {
+        if (getTitle() > other.getTitle()) {
             return 1;
         }
-        if (getTitle() > other.getTitle()) {
+        if (getTitle() < other.getTitle()) {
             return -1;
         }
     }
-    if (getDirector() < other.getDirector()) {
+    if (getDirector() > other.getDirector()) {
         return 1;
     }
-    if (getDirector() > other.getDirector()) {
+    if (getDirector() < other.getDirector()) {
         return -1;
     }
 }

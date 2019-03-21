@@ -103,17 +103,17 @@ int Classic::compareRelease(const Classic &other) const {
         if (getReleaseMonth() == other.getReleaseMonth()) {
             return 0;
         }
-        if (getReleaseMonth() > other.getReleaseMonth()) {
+        if (getReleaseMonth() < other.getReleaseMonth()) {
             return 1;
         }
-        if (getReleaseMonth() < other.getReleaseMonth()) {
+        if (getReleaseMonth() > other.getReleaseMonth()) {
             return -1;
         }
     }
-    if (getReleaseYear() > other.getReleaseYear()) {
+    if (getReleaseYear() < other.getReleaseYear()) {
         return 1;
     }
-    if (getReleaseYear() < other.getReleaseYear()) {
+    if (getReleaseYear() > other.getReleaseYear()) {
         return -1;
     }
     return INT16_MAX;
@@ -126,17 +126,17 @@ int Classic::compareActor(const Classic &other) const {
         if (getActorLast() == other.getActorLast()) {
             return 0;
         }
-        if (getActorLast() < other.getActorLast()) {
+        if (getActorLast() > other.getActorLast()) {
             return 1;
         }
-        if (getActorLast() > other.getActorLast()) {
+        if (getActorLast() < other.getActorLast()) {
             return -1;
         }
     }
-    if (getActorFirst() < other.getActorFirst()) {
+    if (getActorFirst() > other.getActorFirst()) {
         return 1;
     }
-    if (getActorFirst() > other.getActorFirst()) {
+    if (getActorFirst() < other.getActorFirst()) {
         return -1;
     }
     return INT16_MAX;
