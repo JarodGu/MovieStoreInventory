@@ -1,6 +1,6 @@
 //
 // Created by Kaib Cropley on 3/4/2019.
-// Updated by Kaib Cropley on 3/18/2019.
+// Updated by Kaib Cropley on 3/20/2019.
 //
 // Base file for all media within store
 //
@@ -14,15 +14,14 @@ public:
     // Constructor
     Media(char mediaType, int stock);
 
-    // Destructor
-    ~Media();
-
     // Returns type of media
     char getMediaType() const;
 
     // Returns current stock
     int getStock() const;
 
+    // Sets stock to give integer
+    // Returns false if the integer is below 0
     bool setStock(int stockLevel);
 
     // Removes one unit from the stock of this media
@@ -33,7 +32,6 @@ public:
     void returnStock();
 
     // Comparison operators - Compares based on their media type
-    // If same media type will always be equal
     bool operator>(const Media &other) const;
     bool operator<(const Media &other) const;
     bool operator>=(const Media &other) const;

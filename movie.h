@@ -1,6 +1,6 @@
 //
 // Created by Kaib Cropley on 3/4/2019.
-// Updated by Kaib Cropley on 3/18/2019.
+// Updated by Kaib Cropley on 3/20/2019.
 //
 // Base file for all movie types within store
 //
@@ -13,6 +13,8 @@
 #include "media.h"
 
 class Movie : public Media {
+    // Allows for converting this movie to ostream
+    friend std::ostream &operator<<(std::ostream &out, const Movie &in);
 
 public:
     // Constructor
@@ -44,13 +46,15 @@ public:
 
     bool operator<=(const Movie &other) const;
 
+    // Returns movie with all of it's details as a string
     virtual std::string string() const;
 
+    // Pure virtual function to allow for sorting by comparison with children
+    // Returns: -1 if <, 0 if ==, 1 if >
     virtual int compare(const Movie &other) const = 0;
 
-protected:
-    friend std::ostream &operator<<(std::ostream &out, const Movie &in);
-
+    // Compares movie types
+    // Returns -1 if <, 0 if ==, 1 if >
     int compareMovieType(const Movie &other) const;
 
 private:

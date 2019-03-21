@@ -1,6 +1,6 @@
 //
 // Created by Kaib Cropley on 3/4/2019.
-// Updated by Kaib Cropley on 3/18/2019.
+// Updated by Kaib Cropley on 3/20/2019.
 //
 // Drama movie
 //
@@ -11,7 +11,9 @@
 #include "movie.h"
 
 class Drama : public Movie {
+    // Allows for converting this movie to ostream
     friend std::ostream &operator<<(std::ostream &out, const Drama &in);
+
 public:
     // Constructor
     Drama(int stock, std::string director,
@@ -30,8 +32,11 @@ public:
 
     bool operator<=(const Drama &other) const;
 
+    // Returns movie with all of it's details as a string
     std::string string() const override;
 
+    // Compares this movie to another
+    // Returns: -1 if <, 0 if ==, 1 if >
     int compare(const Movie &other) const override;
 };
 

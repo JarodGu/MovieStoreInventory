@@ -1,6 +1,6 @@
 //
 // Created by Kaib Cropley on 3/4/2019.
-// Updated by Kaib Cropley on 3/18/2019.
+// Updated by Kaib Cropley on 3/20/2019.
 //
 // Comedy movie
 //
@@ -14,6 +14,7 @@ Comedy::Comedy(int stock, std::string director,
 
 }
 
+// Compares comedies against other comedies by title, released year
 bool Comedy::operator>(const Comedy &other) const {
     return (compare(other) == 1);
 }
@@ -38,11 +39,13 @@ bool Comedy::operator<=(const Comedy &other) const {
     return (*(this) < other || *(this) == other);
 }
 
+// Allows for converting this movie to ostream
 std::ostream &operator<<(std::ostream &out, const Comedy &in) {
     out << in.string();
     return out;
 }
 
+// Returns movie with all of it's details as a string
 std::string Comedy::string() const {
     std::string out = "";
     out += getMovieType();
@@ -53,6 +56,8 @@ std::string Comedy::string() const {
     return out;
 }
 
+// Compares this movie to another
+// Returns: -1 if <, 0 if ==, 1 if >
 int Comedy::compare(const Movie &other) const {
     if (compareMovieType(other) != 0) {
         return compareMovieType(other);
