@@ -41,7 +41,7 @@ bool Store::Borrow(int custID, Movie &theMovie)
     if(theMovie.borrowStock())
     {
         // Add transaction to customer
-        string transaction = "Cust#" + to_string(custID) + "borrowed " + theMovie.getTitle();
+        string transaction = "Cust#" + to_string(custID) + " borrowed " + theMovie.getTitle();
         Customers.addTransaction(custID, transaction);
         return true;
     } else {
@@ -61,18 +61,12 @@ bool Store::Borrow(int custID, Movie &theMovie)
  */
 bool Store::Return(int custID, Movie &theMovie)
 {
-    NodeData temp(&theMovie);
-    NodeData *pTarget;
-    if(Movies.retrieve(temp, pTarget)) // can't return a movie we don't have
-    {
-        pTarget->returnStock();
-        // Add transaction to customer
-        string transaction = "Cust#" + to_string(custID) + "returned " + theMovie.getTitle();
-        Customers.addTransaction(custID, transaction);
-        return true;
-    }
-    cout << "Error: Movie not in inventory" << endl;
-    return false;
+    theMovie.returnStock();
+    // Add transaction to customer
+    string transaction = "Cust#" + to_string(custID) + " returned " + theMovie.getTitle();
+    Customers.addTransaction(custID, transaction);
+    return true;
+
 }
 
 /*
@@ -158,11 +152,17 @@ bool Store::AddCustomer(int custID, const string &first, const string &last)
 
 /*
  * Functions to retrieve a movie based on criterion.
- * Returns false if the comedy movie could not be found.
+ * Returns false if the movie could not be found.
  * Returns true and sets pTarget to point to the movie
  * in inventory if found.
  */
+///////////////////////////////////////////////////////////////
 bool Store::findComedy(string &title, int releaseYear, NodeData* &pTarget)
 {
     return Movies.retrieveComedy(title, releaseYear, pTarget);
+}
+
+bool Store::findDrama(string &director, string &title, NodeData *&pTarget)
+{
+    return Movies.retrieveDrama(director, title, pTarget);
 }

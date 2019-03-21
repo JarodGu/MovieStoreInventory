@@ -326,6 +326,53 @@ bool BinTree::retrieveComedy(string &title, int releaseYear, NodeData *&pTarget)
 }
 
 /*
+ * Retrieves a drama from the movie inventory using the name of the director
+ * and title of movie.
+ * Searches inventory using in-order traversal.
+ * Postcondition: pTarget points to the NodeData with the target movie if found.
+ *
+ */
+bool BinTree::retrieveDrama(string &director, string &title, NodeData *&pTarget)
+{
+    dramaHelper(root, director, title, pTarget);
+    return pTarget != nullptr;
+}
+
+/*
+ * Helper function sets pTarget equal to the movie in inventory if
+ * the director and title match
+ */
+void BinTree::dramaHelper(BinTree::Node *current, string &director, string &title, NodeData *&pTarget)
+{
+    if(current != nullptr)
+    {
+        // Left
+        dramaHelper(current->left, director, title, pTarget);
+        // Current - Check if equal
+        if(current->data->getDirector() == director && current->data->getTitle() == title)
+        {
+            pTarget = current->data;
+        }
+        // Right
+        dramaHelper(current->right, director, title, pTarget);
+    }
+}
+
+bool
+BinTree::retrieveClassic(int releaseMonth, int releaseYear, string &actorFirst, string &actorLast, NodeData *&pTarget)
+{
+    return false;
+}
+
+void
+BinTree::classicHelper(BinTree::Node *current, int releaseMonth, int releaseYear, string &actorFirst, string &actorLast,
+                       NodeData *&pTarget)
+{
+
+}
+
+
+/*
  * Inserts an item into the correct spot in the BinarySearchTree.
  * Creates a new tree if empty.
  * Returns false if inserting an existing value, otherwise true.

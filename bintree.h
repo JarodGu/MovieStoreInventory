@@ -35,8 +35,9 @@ public:
     bool retrieve(const NodeData &target, NodeData* &pTarget);
 
     bool retrieveComedy(string &title, int releaseYear, NodeData* &pTarget);
-    //bool retrieveDrama()
-    //bool retrieveClassic()
+    bool retrieveDrama(string &director, string &title, NodeData* &pTarget);
+    bool retrieveClassic(int releaseMonth, int releaseYear, string &actorFirst,
+            string &actorLast, NodeData* &pTarget);
 
     bool insert(NodeData* item);
     int getHeight(const NodeData &n) const;
@@ -59,7 +60,9 @@ private:
 
     // Movie specific utility functions
     void comedyHelper(Node *current, string &title, int releaseYear, NodeData* &pTarget);
-
+    void dramaHelper(Node *current, string &director, string &title, NodeData* &pTarget);
+    void classicHelper(Node *current, int releaseMonth, int releaseYear, string &actorFirst,
+                        string &actorLast, NodeData* &pTarget);
     // Utility functions
     void inorderHelper(Node* current, int &index, NodeData* arr[]) const;
     Node* arrayToBSTHelper(int low, int high, NodeData* arr[]);

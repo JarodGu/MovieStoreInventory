@@ -26,7 +26,7 @@ public:
 
     bool Borrow(int custID, Movie &theMovie);
 
-    bool Return(int custID, Movie &pMovie);
+    bool Return(int custID, Movie &theMovie);
 
     bool History(int custID) const;
 
@@ -43,6 +43,8 @@ public:
     // Functions to find movies (return and borrow)
     bool findComedy(string &title, int releaseYear, NodeData *&pTarget);
     bool findDrama(string &director, string &title, NodeData *&pTarget);
+    bool findClassic(int releaseMonth, int releaseYear, string &actorfirst, string &actorLast,
+            NodeData *&pTarget);
 
 private:
     BinTree Movies;

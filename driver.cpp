@@ -145,24 +145,18 @@ int main()
         vector<string> tokens; // Create vector to hold info about a movie to be added
         storeCmd = infile3.get();
 
-        getline(infile3,info); // Get whole line
+        getline(infile3, info); // Get whole line
         if (info[info.size() - 1] == '\r') // trim \r from string
             info.resize(info.size() - 1);
 
-        if(storeCmd == 'I') // Output inventory
+        if (storeCmd == 'I') // Output inventory
         {
             BlockBuster.getInventory();
         }
-        else if(storeCmd =='B') // Borrow movie
+            // Borrow movie
+        else if (storeCmd == 'B')
         {
             // Parse
-            /*
-            getline(infile3,info);
-
-            if (info[info.size() - 1] == '\r') // trim \r from string
-                info.resize(info.size() - 1);
-            */
-
             istringstream ss(info);
             string token;
 
@@ -180,7 +174,74 @@ int main()
             tokens.push_back(token);
             char genre = tokens[2][0];
 
-            if(genre == 'F')
+            if (genre == 'F')
+            {
+                // Parse comedy
+                getline(ss, token, ','); // Get movie title
+                tokens.push_back(token);
+
+                getline(ss, token, ','); // Get release year
+                tokens.push_back(token);
+                int releaseYear = stoi(tokens[4]);
+
+                // Make a movie from the info
+                NodeData *pMovie = nullptr;
+                if (BlockBuster.findComedy(tokens[3], releaseYear, pMovie))
+                {
+                    BlockBuster.Borrow(custID, pMovie->getData());
+                } else
+                { // Movie not found
+                    cout << "Error: Movie does not exist" << endl;
+                }
+            } else if (genre == 'D') // Drama
+            {
+                // Parse drama
+                getline(ss, token, ','); // Get director
+                tokens.push_back(token);
+
+                getline(ss, token, ' '); // blank
+                getline(ss, token, ','); // Get movie title
+                tokens.push_back(token);
+
+                NodeData *pMovie = nullptr;
+                if(BlockBuster.findDrama(tokens[3], tokens[4], pMovie))
+                {
+                    BlockBuster.Borrow(custID, pMovie->getData());
+                } else // Movie not found
+                {
+                       cout << "Error: Movie does not exist" << endl;
+                }
+
+            } else if (genre == 'C') // Classic
+            {
+                // Parse classic
+            } else
+            {
+                cout << "Error: Movie genre does not exist" << endl;
+                getline(infile3, info);
+            }
+        }
+            // Return movie
+        else if (storeCmd == 'R')
+        {
+            istringstream ss(info);
+            string token;
+
+            getline(ss, token, ' '); // Blank
+
+            getline(ss, token, ' '); // CustID
+            tokens.push_back(token);
+            int custID = stoi(tokens[0]);
+
+            getline(ss, token, ' '); // Media Type
+            tokens.push_back(token);
+            char mediaType = tokens[1][0];
+
+            getline(ss, token, ' '); // Genre
+            tokens.push_back(token);
+            char genre = tokens[2][0];
+
+            if (genre == 'F')
             {
                 // Parse comedy
                 getline(ss, token, ','); // Get movie title
@@ -192,47 +253,50 @@ int main()
 
                 // Make a movie from the info
 
-                NodeData* pMovie = nullptr;
-                if(BlockBuster.findComedy(tokens[3], releaseYear, pMovie))
+                NodeData *pMovie = nullptr;
+                if (BlockBuster.findComedy(tokens[3], releaseYear, pMovie))
                 {
-                    BlockBuster.Borrow(custID, pMovie->getData());
+                    BlockBuster.Return(custID, pMovie->getData());
+                } else
+                { // Movie not found
+                    cout << "Error: Movie does not exist" << endl;
                 }
-            }
-            else if(genre == 'D')
+            } else if (genre == 'D')
             {
                 // Parse drama
-            }
-            else if(genre == 'C')
+                getline(ss, token, ','); // Get director
+                tokens.push_back(token);
+
+                getline(ss, token, ' '); // blank
+                getline(ss, token, ','); // Get movie title
+                tokens.push_back(token);
+
+                NodeData *pMovie = nullptr;
+                if(BlockBuster.findDrama(tokens[3], tokens[4], pMovie))
+                {
+                    BlockBuster.Return(custID, pMovie->getData());
+                } else // Movie not found
+                {
+                    cout << "Error: Movie does not exist" << endl;
+                }
+            } else if (genre == 'C')
             {
                 // Parse classic
-            } else {
-                cout << "Error: Movie genre does not exist" << endl;
-                getline(infile3,info);
-            }
-        }
-        /*
-            while(getline(ss, token, ' '))
+            } else
             {
-                //token.erase(0, 1); // erase extra space at start
-                tokens.push_back(token);
+                cout << "Error: Movie genre does not exist" << endl;
+                getline(infile3, info);
             }
-
-        }
-        else if(storeCmd == 'R') // Return movie
+        } else if (storeCmd == 'H') // Output customer's transaction history
         {
-            // Parse
-        }
-        else if(storeCmd == 'H') // Output customer's transaction history
+            //int custID = stoi(tokens[0]);
+            //BlockBuster.History(custID);
+        } else
         {
-            int custID = stoi(tokens[0]);
-            BlockBuster.History(custID);
+            cout << "Error: Invalid command code" << endl;
         }
-        else
-        {
-        cout << "Error: Invalid command code" << endl;
-        }
-
-
+    }
+        /*
         getline(infile3,info);
 
         if (info[info.size() - 1] == '\r') // trim \r from string
@@ -263,8 +327,6 @@ int main()
 
         else if(storeCmd == 'H')
         {
-*/
-
-    }
+        */
     return 0;
 }
