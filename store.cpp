@@ -1,5 +1,5 @@
 // ------------- store.cpp -------------------------------------------------
-// Jarod Guerrero, Ajeet Dhaliwal, Kaib Cropley CSS 343 C
+// Jarod Guerrero, Ajeet Dhaliwal, Kaib Cropley CSS ThreeFourThree C
 // Created 3/9/19
 // Last Modified 3/20/19
 // -------------------------------------------------------------------------
